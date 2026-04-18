@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartoon Buttons</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, #fff7fb 0%, #fdf1ff 100%);
+        font-family: "Trebuchet MS", "Comic Sans MS", sans-serif;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        width: min(320px, 92vw);
+        padding: 20px 0;
+      }
+
+      .cartoon-btn {
+        appearance: none;
+        border: 4px solid #3d2d4f;
+        border-radius: 20px;
+        width: min(180px, 72vw);
+        aspect-ratio: 1 / 1;
+        min-height: 120px;
+        font-size: clamp(1.1rem, 4.8vw, 1.35rem);
+        font-weight: 700;
+        color: #3d2d4f;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 8px 0 #3d2d4f;
+        transition:
+          transform 0.08s ease,
+          box-shadow 0.08s ease,
+          filter 0.15s ease;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      .cartoon-btn::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 14px;
+        width: 38%;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.65);
+        pointer-events: none;
+      }
+
+      .cartoon-btn:hover {
+        filter: brightness(1.03);
+      }
+
+      .cartoon-btn:active {
+        transform: translateY(8px) scale(0.98);
+        box-shadow: 0 0 0 #3d2d4f;
+      }
+
+      .cartoon-btn:focus-visible {
+        outline: 4px solid rgba(125, 92, 255, 0.25);
+        outline-offset: 4px;
+      }
+
+      .btn-1 {
+        background: #ffb3d9;
+      }
+
+      .btn-2 {
+        background: #b8f2e6;
+      }
+
+      .btn-3 {
+        background: #ffe08a;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 16px;
+        }
+
+        .wrapper {
+          gap: 16px;
+          width: 100%;
+        }
+
+        .cartoon-btn {
+          width: min(190px, 78vw);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <button class="cartoon-btn btn-1" id="playBtn">Play</button>
+      <button class="cartoon-btn btn-2" id="jackbotBtn">Jackbot</button>
+      <button class="cartoon-btn btn-3" id="stopBtn">Stop</button>
+    </div>
+
+    <script>
+      const playAudio = new Audio("play.mp3");
+      const jackbotAudio = new Audio("jackpot.mp3");
+
+      function stopAllSounds() {
+        [playAudio, jackbotAudio].forEach((audio) => {
+          audio.pause();
+          audio.currentTime = 0;
+        });
+      }
+
+      document.getElementById("playBtn").addEventListener("click", () => {
+        stopAllSounds();
+        playAudio.play();
+      });
+
+      document.getElementById("jackbotBtn").addEventListener("click", () => {
+        stopAllSounds();
+        jackbotAudio.play();
+      });
+
+      document.getElementById("stopBtn").addEventListener("click", () => {
+        stopAllSounds();
+      });
+    </script>
+  </body>
+</html>
