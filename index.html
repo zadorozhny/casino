@@ -68,8 +68,17 @@
 
       .cartoon-btn:hover {
         filter: brightness(1.03);
+      }
+
+      .cartoon-btn:active,
+      .cartoon-btn.pressed {
         transform: translateY(8px) scale(0.98);
         box-shadow: 0 0 0 #3d2d4f;
+      }
+
+      .cartoon-btn:focus-visible {
+        outline: 4px solid rgba(125, 92, 255, 0.25);
+        outline-offset: 4px;
       }
 
       .btn-1 {
@@ -110,6 +119,7 @@
     <script>
       const playAudio = new Audio("play.mp3");
       const jackbotAudio = new Audio("jackpot.mp3");
+      const buttons = document.querySelectorAll(".cartoon-btn");
 
       function stopAllSounds() {
         [playAudio, jackbotAudio].forEach((audio) => {
@@ -117,6 +127,46 @@
           audio.currentTime = 0;
         });
       }
+
+      function pressButton(button) {
+        button.classList.add("pressed");
+      }
+
+      function releaseButton(button) {
+        setTimeout(() => {
+          button.classList.remove("pressed");
+        }, 120);
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener(
+          "touchstart",
+          () => {
+            pressButton(button);
+          },
+          { passive: true },
+        );
+
+        button.addEventListener("touchend", () => {
+          releaseButton(button);
+        });
+
+        button.addEventListener("touchcancel", () => {
+          button.classList.remove("pressed");
+        });
+
+        button.addEventListener("mousedown", () => {
+          pressButton(button);
+        });
+
+        button.addEventListener("mouseup", () => {
+          releaseButton(button);
+        });
+
+        button.addEventListener("mouseleave", () => {
+          button.classList.remove("pressed");
+        });
+      });
 
       document.getElementById("playBtn").addEventListener("click", () => {
         stopAllSounds();
