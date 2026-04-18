@@ -112,17 +112,17 @@
   <body>
     <div class="wrapper">
       <button class="cartoon-btn btn-1" id="playBtn">Play</button>
-      <button class="cartoon-btn btn-2" id="jackbotBtn">Jackbot</button>
+      <button class="cartoon-btn btn-2" id="jackpotBtn">Jackpot</button>
       <button class="cartoon-btn btn-3" id="stopBtn">Stop</button>
     </div>
 
     <script>
       const playAudio = new Audio("play.mp3");
-      const jackbotAudio = new Audio("jackpot.mp3");
+      const jackpotAudio = new Audio("jackpot.mp3");
       const buttons = document.querySelectorAll(".cartoon-btn");
 
       function stopAllSounds() {
-        [playAudio, jackbotAudio].forEach((audio) => {
+        [playAudio, jackpotAudio].forEach((audio) => {
           audio.pause();
           audio.currentTime = 0;
         });
@@ -173,9 +173,9 @@
         playAudio.play();
       });
 
-      document.getElementById("jackbotBtn").addEventListener("click", () => {
+      document.getElementById("jackpotBtn").addEventListener("click", () => {
         stopAllSounds();
-        jackbotAudio.play();
+        jackpotAudio.play();
       });
 
       document.getElementById("stopBtn").addEventListener("click", () => {
